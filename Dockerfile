@@ -11,6 +11,6 @@ RUN npm install
 COPY . .
 
 #TODO: Find way to take PORT enviroment variable instead of hard coding
-EXPOSE 3000
+EXPOSE 8080
 CMD ["node", "index.js"]
 
