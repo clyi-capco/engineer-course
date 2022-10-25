@@ -2,6 +2,7 @@ const expect = require('chai').expect;
 const request = require('request');
 const api = require('../index');
 
+const host = process.env.HOST || 'http://localhost';
 const port = process.env.PORT || 80;
 const mongoUrl = process.env.MONGOURL;
 
@@ -12,9 +13,8 @@ before(done => {
 });
 
 describe('API', () => {
-    //TODO: const testData = require('test-data.json');
-
-    let baseUrl = `http://localhost:${ port }`;
+    let baseUrl = `${ host }:${ port }`;
+    console.log(baseUrl);
 
     describe('Hello World Endpoint', () => {
         let url = baseUrl + '/helloWorld';
