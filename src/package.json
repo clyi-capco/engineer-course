@@ -1,6 +1,6 @@
 {
   "name": "engineer-course",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Source control for my implementation of the team course.",
   "main": "index.js",
   "scripts": {

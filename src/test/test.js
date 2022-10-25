@@ -16,7 +16,7 @@ describe('API', () => {
     let baseUrl = `${ host }:${ port }`;
     console.log(baseUrl);
 
-    describe('Hello World Endpoint', () => {
+    describe('GET /helloWorld', () => {
         let url = baseUrl + '/helloWorld';
 
         it("returns status 200", (done) => {
@@ -32,6 +32,18 @@ describe('API', () => {
                 done();
             });
         });
+    });
+
+    describe('/users', () => {
+        let url = baseUrl + '/users';
+
+        describe("GET /users", () => {
+            
+        }); 
+        
+        describe("POST /users", () => {
+            
+        }); 
     });
 
 });

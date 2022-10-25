@@ -26,7 +26,7 @@ mongoose.connect( mongoUrl ).then(() => {
      */
     app.get('/helloWorld', (req, res) => {
         res.send('Hello World!');
-        console.log(`responded to request for ${ req.originalUrl }`);
+        //console.log(`responded to request for ${ req.originalUrl }`);
     });
 
     app.listen(port, () => {

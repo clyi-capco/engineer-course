@@ -1,8 +1,8 @@
 module.exports = {
     swaggerDefinition: {
         info: {
-            title: 'Hello World API',
-            version: '1.0.0'
+            title: 'Engineer Course API',
+            version: '0.0.1'
         }
     },
     apis: ['index.js']
