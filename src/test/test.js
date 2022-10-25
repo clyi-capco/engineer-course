@@ -19,14 +19,14 @@ describe('API', () => {
     describe('GET /helloWorld', () => {
         let url = baseUrl + '/helloWorld';
 
-        it("returns status 200", (done) => {
+        it('returns status 200', (done) => {
             request(url, (err, res, body) => {
                 expect(res.statusCode).to.equal(200);
                 done();
             });
         });
 
-        it("returns 'Hello World!' in body", (done) => {
+        it('returns "Hello World!" in body', (done) => {
             request(url, (err, res, body) => {
                 expect(body).to.equal('Hello World!');
                 done();
@@ -37,11 +37,11 @@ describe('API', () => {
     describe('/users', () => {
         let url = baseUrl + '/users';
 
-        describe("GET /users", () => {
+        describe('GET /users', () => {
             
         }); 
         
-        describe("POST /users", () => {
+        describe('POST /users', () => {
             
         }); 
     });
