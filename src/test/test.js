@@ -1,6 +1,8 @@
 const expect = require('chai').expect;
 const request = require('request');
 const api = require('../index');
+const mongoose = require('mongoose');
+const mongoUnit = require('mongoUnit');
 
 const host = process.env.HOST || 'http://localhost';
 const port = process.env.PORT || 80;
