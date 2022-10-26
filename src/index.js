@@ -28,7 +28,6 @@ app.use('/swagger-ui', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
  */
 app.get('/helloWorld', (req, res) => {
     res.send('Hello World!');
-    //console.log(`responded to request for ${ req.originalUrl }`);
 });
 
 /**
@@ -55,9 +54,10 @@ app.post('/users', (req, res) => {
     
 });
 
-app.listen(port, () => {
-    console.log(`listening on port ${ port }`);
-    app.emit('app_started');
-});
+if(require.main === module) {
+    app.listen(port, () => {
+        console.log(`listening on port ${ port }`);
+    });
+}
 
 module.exports = app;

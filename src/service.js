@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const mongoUrl = process.env.MONGOURL;
 
+let client;
 mongoose.connect( mongoUrl );
 
 const UserSchema = new mongoose.Schema({
@@ -14,5 +15,5 @@ const User = mongoose.model('User', UserSchema);
 
 module.exports = {
     getUsers: () => User.find(),
-    addUser: params => new User(params).save()
+    addUser: params => new User(params).save(),
 };
