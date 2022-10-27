@@ -1,0 +1,14 @@
+{
+    "appenders": { 
+        "app": { 
+            "type": "file", 
+            "filename": "cheese.log" 
+        }
+    },
+    "categories": {
+        "default": { 
+            "appenders": ["app"], 
+            "level": "DEBUG"
+        }
+    }
+}

@@ -6,7 +6,22 @@ const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
 const swaggerOptions = require('./swagger');
 const service = require('./service');
+const log4js = require('log4js');
 
+//create log directory if not exists
+try {
+    require('fs').mkdirSync('./log');
+} catch (err) {
+    if(err.code != 'EEXIST') {
+        throw err;
+    }
+}
+
+//logging
+log4js.configure('./config/log4js.json');
+log = log4js.getLogger('app');
+
+//express init
 const app = express();
 
 const port = process.env.PORT || 80;

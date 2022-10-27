@@ -1,8 +1,7 @@
 const mongoose = require('mongoose');
 const mongoUrl = process.env.MONGOURL;
 
-console.log(mongoUrl);
-mongoose.connect( mongoUrl );
+mongoose.connect(mongoUrl);
 
 //user format
 const UserSchema = new mongoose.Schema({
