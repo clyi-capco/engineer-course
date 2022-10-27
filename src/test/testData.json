@@ -1,12 +1,12 @@
 {
     "users": [
         {
-            "_id": "6357ece3d07584a6f52d704e",
+            "id": 0,
             "firstName": "Dave",
             "lastName": "Smith"
         },
         {
-            "_id": "6357ece3d07584a6f52d704f",
+            "id": 1,
             "firstName": "Mary",
             "lastName": "McDonald"
         }

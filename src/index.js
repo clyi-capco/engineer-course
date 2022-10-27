@@ -60,7 +60,7 @@ app.post('/users', (req, res) => {
         })
     } else {
         res.status(201);
-        service.addUser(req.body).then(data => res.json(data));
+        service.addUser(req.body.firstName, req.body.lastName).then(data => res.json(data));
     }
     
 });

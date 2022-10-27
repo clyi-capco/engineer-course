@@ -91,25 +91,24 @@ describe('Integration', () => {
                         expect(res.statusCode).to.equal(200);
                         expect(res.body).to.be.a('array');
                         expect(res.body.length).to.be.above(0);
-                        expect(Object.keys(res.body[0])[1]).to.equal('firstName');
-                        expect(Object.keys(res.body[0])[2]).to.equal('lastName');
+                        expect(Object.keys(res.body[0])).contains('firstName');
+                        expect(Object.keys(res.body[0])).contains('lastName');
                         done();
                     });   
             });
         }); 
         
         describe('GET /users/:id', () => {
-            const _id = '6357ece3d07584a6f52d704e';
-            const route = '/users/' + _id;
+            const id = 0;
+            const route = '/users/' + id;
 
             it('return correct user based off id', (done) => {
                 chai.request(api)
                     .get(route)
                     .end((err, res) => {
-                        console.log(res.body);
                         expect(res.statusCode).to.equal(200);
-                        expect(Object.keys(res.body)[1]).to.equal('firstName');
-                        expect(Object.keys(res.body)[2]).to.equal('lastName');
+                        expect(Object.keys(res.body)).contains('firstName');
+                        expect(Object.keys(res.body)).contains('lastName');
                         done();
                     });   
             });
@@ -142,7 +141,7 @@ describe('Integration', () => {
                     })
                     .end((err, res) => {
                         expect(res.statusCode).to.equal(201);
-                        expect(Object.keys(res.body)[2]).to.equal('_id');
+                        expect(Object.keys(res.body)).contains('id');
                         done();
                     });   
             });

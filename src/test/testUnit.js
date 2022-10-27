@@ -32,7 +32,7 @@ describe('Unit', () => {
             return service.getUsers()
                 .then(users => {
                     expect(users.length).to.be.above(0);
-                    expect(Object.keys(users[0].toJSON())).contains('_id');
+                    expect(Object.keys(users[0].toJSON())).contains('id');
                     expect(Object.keys(users[0].toJSON())).contains('firstName');
                     expect(Object.keys(users[0].toJSON())).contains('lastName');
                 });
@@ -40,13 +40,13 @@ describe('Unit', () => {
 
     });
 
-    describe('getUser (from _id)', () => {
+    describe('getUser (from id)', () => {
         it('return single user', () => {
-            id = '6357ece3d07584a6f52d704e';
+            id = 0;
             return service.getUser(id)
                 .then(user => {
                     expect(user).is.not.null;
-                    expect(Object.keys(user.toJSON())).contains('_id');
+                    expect(Object.keys(user.toJSON())).contains('id');
                     expect(Object.keys(user.toJSON())).contains('firstName');
                     expect(Object.keys(user.toJSON())).contains('lastName');
                 });
@@ -57,13 +57,13 @@ describe('Unit', () => {
 
         it('adds user to database', () => {
             const params = { 'firstName': 'James', 'lastName': 'Atkinson'};
-            return service.addUser(params);
+            return service.addUser(params.firstName, params.lastName);
         });
 
         it('returns new user _id, firstName and lastName', () => {
             const params = { 'firstName': 'James', 'lastName': 'Atkinson'};
-            return service.addUser(params).then(res => {
-                expect(Object.keys(res.toJSON())).contains('_id');
+            return service.addUser(params.firstName, params.lastName).then(res => {
+                expect(Object.keys(res.toJSON())).contains('id');
                 expect(Object.keys(res.toJSON())).contains('firstName');
                 expect(Object.keys(res.toJSON())).contains('lastName');
             });
