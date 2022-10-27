@@ -38,4 +38,4 @@ module.exports = {
     getUsers: () => User.find(),
     getUser: (id) => findOneUser(id),
     addUser: (firstName, lastName) => createUser(firstName, lastName)
-};
+}

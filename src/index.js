@@ -43,6 +43,18 @@ app.get('/users', (req, res) => {
     service.getUsers().then(users => res.json(users));
 });
 
+/**
+ * @swagger
+ * /users/:id:
+ *      get:
+ *          description: Return specific user by id
+ *          parameters:
+ *              - in: path
+ *                name: id
+ *                schema:
+ *                  type: integer
+ *                description: id of the user to get.
+ */
 app.get('/users/:id', (req, res) => {
     try {
         service.getUser(req.params.id).then(user => res.json(user));
@@ -53,6 +65,31 @@ app.get('/users/:id', (req, res) => {
     }
 });
 
+/**
+ * @swagger
+ * /users:
+ *      post:
+ *          description: Create new user
+ *      consumes:
+ *          - application/json
+ *      parameters:
+ *          - in: body
+ *            description: The user to create.
+ *            schema:
+ *              type: object
+ *              required:
+ *                  - firstName
+ *                  - lastName
+ *              properties:
+ *                  firstName: 
+ *                      type: string
+ *                  lastName:
+ *                      type: string
+ *      reponses: 
+ *          201:
+ *              description: Created
+ * 
+ */
 app.post('/users', (req, res) => {
     if(!req.body.firstName || !req.body.lastName) {
         res.status(400).send({
@@ -62,7 +99,6 @@ app.post('/users', (req, res) => {
         res.status(201);
         service.addUser(req.body.firstName, req.body.lastName).then(data => res.json(data));
     }
-    
 });
 
 //only run if called directly, don't run if called through require()
