@@ -18,20 +18,16 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-//Function to perform prechecks on id validity before performing User.findOne()
-async function findOneUser(id) {
-    let user = await User.findOne({ 'id': id });
-    if(user == null) {
-        return new Error('user not found');
-    }
-    return user;
-};
-
+//function to generate id for new user and then save to db
 async function createUser(firstName, lastName) {
     let id;
     let highestIdUser = await User.find().select('id').sort({ 'id': -1 }).limit(1).exec();
 
-    id = highestIdUser[0].id + 1;
+    try {
+        id = highestIdUser[0].id + 1;
+    } catch (err) {
+        id = 0;
+    }
 
     return new User({
         id: id,
