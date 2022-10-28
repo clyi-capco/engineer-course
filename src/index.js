@@ -4,7 +4,6 @@ dotenv.config({path:__dirname+'/.env'});
 
 //requires
 const express = require('express');
-const { default: mongoose } = require('mongoose');
 const bodyParser = require('body-parser');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');

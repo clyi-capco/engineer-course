@@ -1,3 +1,4 @@
 /src/node_modules
 /src/log
 mongo-start.sh
+elk-docker-start.sh

@@ -2,3 +2,4 @@
 /src/test
 /src/log
 mongo-start.sh
+elk-docker-start.sh
