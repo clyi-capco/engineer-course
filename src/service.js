@@ -18,9 +18,13 @@ const UserSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', UserSchema);
 
-//Function to perform prechecks on _id validity before performing User.findOne()
-function findOneUser(id) {
-    return User.findOne({ 'id': id });
+//Function to perform prechecks on id validity before performing User.findOne()
+async function findOneUser(id) {
+    let user = await User.findOne({ 'id': id });
+    if(user == null) {
+        return new Error('user not found');
+    }
+    return user;
 };
 
 async function createUser(firstName, lastName) {
@@ -38,6 +42,6 @@ async function createUser(firstName, lastName) {
 
 module.exports = {
     getUsers: () => User.find(),
-    getUser: (id) => findOneUser(id),
+    getUser: (id) => User.findOne({ 'id': id }),
     addUser: (firstName, lastName) => createUser(firstName, lastName)
 }
