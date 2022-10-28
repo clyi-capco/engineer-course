@@ -1,3 +1,4 @@
 /src/node_modules
 /src/test
+/src/log
 mongo-start.sh

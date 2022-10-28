@@ -2,7 +2,7 @@
     "appenders": { 
         "app": { 
             "type": "file", 
-            "filename": "cheese.log" 
+            "filename": "./log/nodeLogs.log" 
         }
     },
     "categories": {

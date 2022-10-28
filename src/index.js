@@ -127,6 +127,7 @@ app.post('/users', (req, res) => {
 if(require.main === module) {
     app.listen(port, () => {
         console.log(`listening on port ${ port }`);
+        log.info(`${new Date().toJSON()}  connection successful`);
     });
 }
 
