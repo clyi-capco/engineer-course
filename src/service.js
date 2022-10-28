@@ -5,7 +5,10 @@ mongoose.connect(mongoUrl);
 
 //user format
 const UserSchema = new mongoose.Schema({
-    id: { type: Number, index: true },
+    id: { 
+        type: Number, 
+        index: true 
+    },
     firstName: String,
     lastName: String
 }, {

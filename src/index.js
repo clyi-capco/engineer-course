@@ -1,4 +1,8 @@
-require('dotenv').config();
+//dotenv init
+const dotenv = require('dotenv');
+dotenv.config({path:__dirname+'/.env'});
+
+//requires
 const express = require('express');
 const { default: mongoose } = require('mongoose');
 const bodyParser = require('body-parser');
@@ -69,6 +73,9 @@ app.get('/users', (req, res) => {
  *                schema:
  *                  type: integer
  *                description: id of the user to get.
+ *          responses:
+ *              200:
+ *                  description: Success
  */
 app.get('/users/:id', (req, res) => {
     try {
