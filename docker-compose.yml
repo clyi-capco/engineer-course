@@ -1,0 +1,23 @@
+version: '1'
+services:
+  api:
+    image: 'clyi/engineer-course'
+    ports:
+      - '8080:8080'
+  db:
+    image: 'mongo:latest' 
+    ports:
+      - '27017:27017'
+    volumes:
+      - 'data-vol:/data/db'
+  elk:
+    image: 'clyi/elk'
+    ports:
+      - '5601:5601'
+      - '9200:9200'
+      - '5044:5044'
+    volumes:
+      - 'elk-vol:/var/lib/elasticsearch'
+volumes:
+  data-vol:
+  elk-vol:
