@@ -20,7 +20,7 @@ jobs:
       - checkout
       - run: echo 'Running integration tests'
       - run: npm install --prefix src
-      - run: npm run testUnit --prefix src
+      - run: npm run testIntegration --prefix src
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
