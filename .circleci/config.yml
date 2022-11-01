@@ -10,6 +10,7 @@ jobs:
     docker:
       - image: circleci/node:12.18
     steps:
+      - run: echo 'Checking out'
       - checkout
       - run: echo 'Running unit tests'
       - run: npm install
