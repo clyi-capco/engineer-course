@@ -6,6 +6,7 @@ services:
       co.elastic.logs/enabled: true
     ports:
       - '8080:8080'
+      
   db:
     image: 'mongo:latest' 
     ports:
@@ -14,6 +15,7 @@ services:
       co.elastic.logs/enabled: false
     volumes:
       - 'data-vol:/data/db'
+
   elk:
     image: 'clyi/elk'
     ports:
@@ -28,6 +30,7 @@ services:
       test: curl -s http://elk:9200 >/dev/null || exit 1
       interval: 5s
       timeout: 3s
+
   filebeat:
     image: 'docker.elastic.co/beats/filebeat:8.4.3'
     user: 'root'
@@ -44,6 +47,7 @@ services:
       - './filebeat.docker.yml:/usr/share/filebeat/filebeat.yml:ro'
       - '/var/lib/docker/containers:/var/lib/docker/containers:ro'
       - '/var/run/docker.sock:/var/run/docker.sock:ro'
+
 volumes:
   data-vol:
   elk-vol:
