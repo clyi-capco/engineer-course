@@ -6,15 +6,21 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   test-unit:
-    working_directory: ./src
     docker:
       - image: circleci/node:12.18
     steps:
-      - run: echo 'Checking out'
       - checkout
       - run: echo 'Running unit tests'
-      - run: npm install
-      - run: npm run testUnit
+      - run: npm install --prefix src
+      - run: npm run testUnit --prefix src
+  test-integration:
+    docker:
+      - image: circleci/node:12.18
+    steps:
+      - checkout
+      - run: echo 'Running integration tests'
+      - run: npm install --prefix src
+      - run: npm run testUnit --prefix src
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -22,4 +28,5 @@ workflows:
   test-workflow:
     jobs:
       - test-unit
+      - test-integration
 
