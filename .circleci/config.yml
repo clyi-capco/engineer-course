@@ -6,7 +6,7 @@ version: 2.1
 # See: https://circleci.com/docs/2.0/configuration-reference/#jobs
 jobs:
   test-unit:
-    working_directory: ./src
+    working_directory: ~engineer-course/src
     docker:
       - image: circleci/node:12.18
     steps:
