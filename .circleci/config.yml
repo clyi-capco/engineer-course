@@ -13,6 +13,8 @@ jobs:
       - run: echo 'Checking out'
       - checkout
       - run: echo 'Running unit tests'
+      - run: ls
+      - run: cd .. && ls
       - run: npm install
       - run: npm run testUnit
 
