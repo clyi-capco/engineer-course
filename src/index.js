@@ -22,7 +22,7 @@ try {
 
 //logging
 log4js.configure('./config/log4js.json');
-log = log4js.getLogger('app');
+log = log4js.getLogger();
 
 //express init
 const app = express();

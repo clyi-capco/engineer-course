@@ -2,3 +2,4 @@
 /src/log
 mongo-start.sh
 elk-docker-start.sh
+logstash-beats.crt

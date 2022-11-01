@@ -1,17 +1,20 @@
 {
     "appenders": { 
-        "app": { 
+        "local": { 
             "type": "file", 
             "filename": "./log/nodeLogs.log",
             "maxLogSize": 10485760,
             "backups": 5, 
             "compress": true,
             "encoding": "utf-8"
+        },
+        "out": { 
+            "type": "stdout"
         }
     },
     "categories": {
         "default": { 
-            "appenders": ["app"], 
+            "appenders": ["local","out"], 
             "level": "DEBUG"
         }
     }
