@@ -1,48 +1,45 @@
-version: '1'
+version: '3'
 services:
   if-api-service:
-    image: 'clyi/engineer-course'
+    image: 'ciaranlyne549/engineer-course'
     labels: 
-      co.elastic.logs/enabled: true
+      co.elastic.logs/enabled: 'true'
+    restart: always
     ports:
       - '8080:8080'
     depends_on:
-      - if-db
-      - elk
+      - 'if-db'
+      - 'elk'
       
   if-db:
     image: 'mongo:latest' 
     ports:
       - '27017:27017'
+    restart: always
     labels: 
-      co.elastic.logs/enabled: false
+      co.elastic.logs/enabled: 'false'
     volumes:
       - 'data-vol:/data/db'
 
   elk:
-    image: 'clyi/elk'
+    image: 'sebp/elk'
     ports:
       - '5601:5601'
       - '9200:9200'
       - '5044:5044'
     labels: 
-      co.elastic.logs/enabled: false
+      co.elastic.logs/enabled: 'false'
     volumes:
       - 'elk-vol:/var/lib/elasticsearch'
-    healthcheck:
-      test: curl -s http://elk:9200 >/dev/null || exit 1
-      interval: 30s
-      timeout: 10s
-      retries: 50
+    restart: always
 
   filebeat:
     image: 'docker.elastic.co/beats/filebeat:8.4.3'
     user: 'root'
     labels: 
-      co.elastic.logs/enabled: false
+      co.elastic.logs/enabled: 'false'
     depends_on:
-      elk:
-        condition: 'service_healthy'
+      - 'elk'
     environment:
       - 'setup.kibana.host=elk:5601'
       - 'output.elasticsearch.hosts=["elk:9200"]'
@@ -54,9 +51,9 @@ services:
 
   zoo1:
     image: 'confluentinc/cp-zookeeper:latest'
-    restart: unless-stopped
+    restart: always
     labels: 
-      co.elastic.logs/enabled: false
+      co.elastic.logs/enabled: 'false'
     ports:
       - '2181:2181'
     environment:
@@ -69,9 +66,9 @@ services:
       - './full-stack/zoo1/datalog:/datalog'
   
   kafka1:
-    image: confluentinc/cp-kafka:latest
+    image: 'confluentinc/cp-kafka:latest'
     labels: 
-      co.elastic.logs/enabled: false
+      co.elastic.logs/enabled: 'false'
     ports:
       - '9092:9092'
     environment:
@@ -83,21 +80,21 @@ services:
     volumes:
       - './full-stack/kafka1/data:/var/lib/kafka/data'
     depends_on:
-      - zoo1
+      - 'zoo1'
 
   kafka-ui:
     image: 'provectuslabs/kafka-ui:latest'
     labels: 
-      co.elastic.logs/enabled: false
+      co.elastic.logs/enabled: 'false'
     ports:
       - '8081:8080'
-    restart: unless-stopped
+    restart: 'unless-stopped'
     environment:
       - KAFKA_CLUSTERS_0_NAME=local
       - KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS=kafka1:9092
       - KAFKA_CLUSTERS_0_READONLY=true
     depends_on:
-      - kafka1
+      - 'kafka1'
 
 volumes:
   data-vol:
