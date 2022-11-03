@@ -1,13 +1,13 @@
 version: '1'
 services:
-  api:
+  if-api-service:
     image: 'clyi/engineer-course'
     labels: 
       co.elastic.logs/enabled: true
     ports:
       - '8080:8080'
       
-  db:
+  if-db:
     image: 'mongo:latest' 
     ports:
       - '27017:27017'
@@ -27,7 +27,7 @@ services:
     volumes:
       - 'elk-vol:/var/lib/elasticsearch'
     healthcheck:
-      test: curl -s http://elk:9200 >/dev/null || exit 1
+      test: 'curl -s http: //elk:9200 >/dev/null || exit 1'
       interval: 5s
       timeout: 3s
 
