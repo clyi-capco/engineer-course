@@ -5,3 +5,4 @@ mongo-start.sh
 elk-docker-start.sh
 logstash-beats.crt
 /kubernetes
+/full-stack

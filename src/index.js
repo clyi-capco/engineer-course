@@ -10,6 +10,7 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerOptions = require('./swagger');
 const service = require('./service');
 const log4js = require('log4js');
+const { Kafka } = require('kafkajs');
 
 //create log directory if not exists
 try {
@@ -23,6 +24,12 @@ try {
 //logging
 log4js.configure('./config/log4js.json');
 log = log4js.getLogger();
+
+//kafka init
+const kafka = new Kafka({
+    clientId: 'api',
+    brokers: [process.env.KAFKAURL],
+})
 
 //express init
 const app = express();
@@ -127,7 +134,7 @@ app.get('/users/:id', async (req, res) => {
  *              description: Created
  * 
  */
-app.post('/users', (req, res) => {
+app.post('/users', async (req, res) => {
     if(!req.body.firstName || !req.body.lastName) {
         log.error(`[Status 400] POST Request made to /users from ${req.hostname} [MISSING REQUIRED FIELDS]`);
         res.status(400).send({
@@ -137,13 +144,27 @@ app.post('/users', (req, res) => {
         log.info(`[Status 201] POST Request made to /users from ${req.hostname} [firstName: ${req.body.firstName}, lastName: ${req.body.lastName}]`);
         res.status(201);
         service.addUser(req.body.firstName, req.body.lastName).then(data => res.json(data));
+
+        //kafka message
+        const producer = kafka.producer({ allowAutoTopicCreation: true });
+
+        let topicString = 'CreatedUser';
+
+        await producer.connect();
+        await producer.send({
+            topic: topicString,
+            messages: [
+                { key: 'Name', value: req.body.firstName + ' ' + req.body.lastName },
+            ]
+        });
+
+        await producer.disconnect();
     }
 });
 
 //only run if called directly, don't run if called through require()
 if(require.main === module) {
     app.listen(port, () => {
-        console.log(`listening on port ${ port }`);
         log.info(`Service started on port ${ port }`);
     });
 }
