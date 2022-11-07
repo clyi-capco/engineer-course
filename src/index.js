@@ -10,7 +10,7 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerOptions = require('./swagger');
 const service = require('./service');
 const log4js = require('log4js');
-const { Kafka } = require('kafkajs');
+const { Kafka, Partitioners } = require('kafkajs');
 
 //create log directory if not exists
 try {
@@ -146,7 +146,7 @@ app.post('/users', async (req, res) => {
         service.addUser(req.body.firstName, req.body.lastName).then(data => res.json(data));
 
         //kafka message
-        const producer = kafka.producer({ allowAutoTopicCreation: true });
+        const producer = kafka.producer({ allowAutoTopicCreation: true, createPartitioner: Partitioners.LegacyPartitioner });
 
         let topicString = 'CreatedUser';
 
